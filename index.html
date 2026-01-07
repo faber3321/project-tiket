@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>Ticket<span>Pro</span></h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#dashboard" class="btn-login">Dashboard</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Experience Amazing Events</h1>
+                <p>Book your tickets for the best events in town with ease and convenience</p>
+                <a href="#events" class="btn-primary">Explore Events</a>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="events">
+            <div class="container">
+                <h2>Popular Events</h2>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://via.placeholder.com/400x250/6a11cb/ffffff?text=Concert" alt="Concert Event">
+                            <div class="event-badge">Popular</div>
+                        </div>
+                        <div class="event-info">
+                            <h3>Summer Music Festival</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-calendar"></i> June 15, 2023</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Central Park</span>
+                            </div>
+                            <div class="event-price">
+                                <span>$49.99</span>
+                            </div>
+                            <button class="btn-secondary" onclick="selectEvent('Summer Music Festival', 49.99)">Select Tickets</button>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://via.placeholder.com/400x250/2575fc/ffffff?text=Theater" alt="Theater Event">
+                        </div>
+                        <div class="event-info">
+                            <h3>Romeo & Juliet</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-calendar"></i> July 22, 2023</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Grand Theater</span>
+                            </div>
+                            <div class="event-price">
+                                <span>$79.99</span>
+                            </div>
+                            <button class="btn-secondary" onclick="selectEvent('Romeo & Juliet', 79.99)">Select Tickets</button>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://via.placeholder.com/400x250/ff6b6b/ffffff?text=Sports" alt="Sports Event">
+                            <div class="event-badge">Limited</div>
+                        </div>
+                        <div class="event-info">
+                            <h3>Champions League Final</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-calendar"></i> May 28, 2023</span>
+                                <span><i class="fas fa-map-marker-alt"></i> National Stadium</span>
+                            </div>
+                            <div class="event-price">
+                                <span>$129.99</span>
+                            </div>
+                            <button class="btn-secondary" onclick="selectEvent('Champions League Final', 129.99)">Select Tickets</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Section -->
+        <section id="checkout" class="checkout-section" style="display: none;">
+            <div class="container">
+                <h2>Checkout</h2>
+                <div class="checkout-container">
+                    <div class="checkout-form">
+                        <div class="form-step active" id="step-1">
+                            <h3>Ticket Selection</h3>
+                            <div class="ticket-summary">
+                                <h4 id="selected-event">No event selected</h4>
+                                <div class="ticket-quantity">
+                                    <label>Number of Tickets:</label>
+                                    <div class="quantity-controls">
+                                        <button type="button" onclick="decreaseQuantity()">-</button>
+                                        <input type="number" id="ticket-quantity" value="1" min="1" max="10">
+                                        <button type="button" onclick="increaseQuantity()">+</button>
+                                    </div>
+                                </div>
+                                <div class="total-price">
+                                    <span>Total: $<span id="total-price">49.99</span></span>
+                                </div>
+                            </div>
+                            
+                            <h3>Order Details</h3>
+                            <form id="order-form">
+                                <div class="form-group">
+                                    <label for="full-name">Full Name</label>
+                                    <input type="text" id="full-name" placeholder="Enter your full name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" placeholder="Enter your email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="special-requests">Special Requests (Optional)</label>
+                                    <textarea id="special-requests" placeholder="Any special requests?"></textarea>
+                                </div>
+                                
+                                <button type="button" class="btn-primary" onclick="nextStep(2)">Continue to Payment</button>
+                            </form>
+                        </div>
+                        
+                        <div class="form-step" id="step-2">
+                            <h3>Payment Method</h3>
+                            <div class="payment-options">
+                                <div class="payment-option">
+                                    <input type="radio" id="transfer" name="payment" value="transfer" checked>
+                                    <label for="transfer">Bank Transfer</label>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <input type="radio" id="ewallet" name="payment" value="ewallet">
+                                    <label for="ewallet">E-Wallet</label>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <input type="radio" id="qris" name="payment" value="qris">
+                                    <label for="qris">QRIS</label>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-details">
+                                <div id="transfer-details" class="payment-detail active">
+                                    <p>Transfer to: 1234567890 (Bank ABC)</p>
+                                    <p>After payment, please upload your proof of payment</p>
+                                </div>
+                                
+                                <div id="ewallet-details" class="payment-detail">
+                                    <p>Pay using your preferred e-wallet app</p>
+                                    <p>Scan the QR code or enter the phone number: +62 812 3456 7890</p>
+                                </div>
+                                
+                                <div id="qris-details" class="payment-detail">
+                                    <p>Scan the QRIS code below with your e-wallet app</p>
+                                    <div class="qr-code">
+                                        <img src="https://via.placeholder.com/150x150/6a11cb/ffffff?text=QR" alt="QRIS Code">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary" onclick="prevStep(1)">Back</button>
+                                <button type="button" class="btn-primary" onclick="completePayment()">Pay Now</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-step" id="step-3">
+                            <h3>Payment Success</h3>
+                            <div class="success-content">
+                                <i class="fas fa-check-circle success-icon"></i>
+                                <h4>Payment Successful!</h4>
+                                <p>Your ticket has been booked successfully.</p>
+                                <p>Order ID: <span id="order-id">TKT-2023-001</span></p>
+                                <button type="button" class="btn-primary" onclick="showTicket()">View E-Ticket</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-summary">
+                        <h3>Order Summary</h3>
+                        <div class="summary-item">
+                            <span id="summary-event">Summer Music Festival</span>
+                            <span>$<span id="summary-price">49.99</span></span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Tickets: <span id="summary-quantity">1</span></span>
+                            <span>x $<span id="ticket-price">49.99</span></span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span>$<span id="final-total">49.99</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Dashboard -->
+        <section id="dashboard" class="dashboard-section" style="display: none;">
+            <div class="container">
+                <h2>User Dashboard</h2>
+                <div class="dashboard-content">
+                    <div class="dashboard-sidebar">
+                        <ul class="dashboard-menu">
+                            <li class="active"><a href="#dashboard-overview">Overview</a></li>
+                            <li><a href="#purchase-history">Purchase History</a></li>
+                            <li><a href="#profile">Profile</a></li>
+                            <li><a href="#settings">Settings</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dashboard-main">
+                        <div class="dashboard-section-content" id="dashboard-overview">
+                            <h3>Welcome Back!</h3>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-ticket-alt"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>Active Tickets</h4>
+                                        <p>3</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-history"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>Purchase History</h4>
+                                        <p>12</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>Upcoming Events</h4>
+                                        <p>2</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-section-content" id="purchase-history" style="display: none;">
+                            <h3>Purchase History</h3>
+                            <div class="history-list">
+                                <div class="history-item">
+                                    <div class="history-info">
+                                        <h4>Summer Music Festival</h4>
+                                        <p>Date: June 15, 2023</p>
+                                        <p>Location: Central Park</p>
+                                    </div>
+                                    <div class="history-status paid">
+                                        <span>Status: Paid</span>
+                                        <button class="btn-sm" onclick="downloadTicket('TKT-2023-001')">Download Ticket</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="history-item">
+                                    <div class="history-info">
+                                        <h4>Romeo & Juliet</h4>
+                                        <p>Date: July 22, 2023</p>
+                                        <p>Location: Grand Theater</p>
+                                    </div>
+                                    <div class="history-status pending">
+                                        <span>Status: Pending</span>
+                                        <button class="btn-sm" onclick="downloadTicket('TKT-2023-002')">Download Ticket</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="history-item">
+                                    <div class="history-info">
+                                        <h4>Champions League Final</h4>
+                                        <p>Date: May 28, 2023</p>
+                                        <p>Location: National Stadium</p>
+                                    </div>
+                                    <div class="history-status paid">
+                                        <span>Status: Paid</span>
+                                        <button class="btn-sm" onclick="downloadTicket('TKT-2023-003')">Download Ticket</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ticket Modal -->
+        <div id="ticket-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeTicketModal()">&times;</span>
+                <h3>Your E-Ticket</h3>
+                <div class="ticket-details">
+                    <div class="ticket-header">
+                        <h2>TicketPro</h2>
+                        <p>Event Ticket</p>
+                    </div>
+                    
+                    <div class="ticket-body">
+                        <h4 id="ticket-event">Summer Music Festival</h4>
+                        <p>Date: June 15, 2023</p>
+                        <p>Time: 7:00 PM</p>
+                        <p>Location: Central Park</p>
+                        <p>Tickets: <span id="ticket-count">1</span></p>
+                        <p>Order ID: TKT-2023-001</p>
+                    </div>
+                    
+                    <div class="qr-container">
+                        <img src="https://via.placeholder.com/200x200/6a11cb/ffffff?text=QR" alt="QR Code">
+                        <p>Scan this QR code for entry</p>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="downloadTicket('TKT-2023-001')">Download E-Ticket</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Ticket<span>Pro</span></h3>
+                <p>Your one-stop solution for booking event tickets with ease and convenience.</p>
+                <div class="social-media">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@ticketpro.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Event St, City</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 TicketPro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
